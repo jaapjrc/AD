@@ -1,4 +1,5 @@
 import java.sql.*;
+import java.util.ArrayList;
 
 /*
 Ejercicios:
@@ -24,8 +25,11 @@ public class H2CreateExample {
         createTableExample.insertarRegistro();
         createTableExample.leerRegistroId(1);
         // Ejercicio 5
-        createTableExample.insertarRegistro2(2, "Fucking Panzas", "LLados Fitness", 1);
-        createTableExample.insertarRegistro2(3, "q", "Gaybriel", 1);
+        createTableExample.insertarRegistro2(2, "A", "A", 1);
+        createTableExample.insertarRegistro2(3, "Q", "Q", 1);
+        createTableExample.insertarRegistro2(4, "C", "C", 2);
+        createTableExample.insertarRegistro2(5, "W", "W", 2);
+        createTableExample.insertarRegistro2(6, "B", "B", 2);
     }
 
     public static Connection getConnection() {
@@ -156,6 +160,28 @@ public class H2CreateExample {
         }
     }
 
+    // Ejercicio 6
+    public void leerRegistroEditorial(int editorial) throws SQLException {
+        try {
+            Connection connection = getConnection();
+            String textoSQL = "select * from libros where editorial=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(textoSQL);
+            preparedStatement.setInt(1, editorial);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+                int id = rs.getInt("id");
+                String titulo = rs.getString("titulo");
+                String autor = rs.getString("autor");
+                System.out.println("Libro:" + id + "," + titulo + "," + autor + "," + editorial);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void leerRegistroId(int id) throws SQLException{
         try{
             Connection connection=getConnection();
@@ -174,5 +200,29 @@ public class H2CreateExample {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    // Ejercicio 10
+    public ArrayList<Libro> librosAutor(String autor){
+
+        ArrayList<Libro> libros = new ArrayList<>();
+
+        try {
+            Connection connection = getConnection();
+            String textoSQL = "select * from libros where autor=?";
+
+            PreparedStatement preparedStatement = connection.prepareStatement(textoSQL);
+            preparedStatement.setString(1, autor);
+
+            ResultSet rs = preparedStatement.executeQuery();
+
+            while (rs.next()) {
+               Libro libro = new Libro(rs.getInt("id"), rs.getString("titulo"), autor, rs.getInt("editorial"));
+                libros.add(libro);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return libros;
     }
 }
