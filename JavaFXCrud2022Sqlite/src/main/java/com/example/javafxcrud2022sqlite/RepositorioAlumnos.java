@@ -1,5 +1,8 @@
 package com.example.javafxcrud2022sqlite;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+
 import java.sql.*;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -10,6 +13,7 @@ public class RepositorioAlumnos {
     Connection conexion;
     public RepositorioAlumnos(){
         setConexion();
+        createTable();
     }
     public void setConexion(){
         try {
@@ -58,6 +62,28 @@ public class RepositorioAlumnos {
         }
         return lista;
     }
+
+    public ObservableList<Alumno> leerTodosFX(){
+        ObservableList<Alumno> lista=null;
+        try {
+            PreparedStatement ps=conexion.prepareStatement("SELECT * FROM alumnos");
+            ResultSet rs=ps.executeQuery();
+            lista= FXCollections.observableArrayList();
+            while(rs.next()){
+                Alumno aux=new Alumno();
+                aux.setId(rs.getInt("id"));
+                aux.setDni(rs.getString("dni"));
+                aux.setNombre(rs.getString("nombre"));
+                aux.setApellidos(rs.getString("apellidos"));
+                aux.setFechaNacimiento(LocalDate.parse(rs.getString("fecha_nacimiento")));
+                lista.add(aux);
+            }
+
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return lista;
+    }
     public void inserta(Alumno a){
         PreparedStatement sentencia = null;
         String sentenciaSql = "INSERT INTO alumnos (nombre, apellidos, dni, fecha_nacimiento) VALUES (?, ?, ?, ?)";
@@ -77,4 +103,41 @@ public class RepositorioAlumnos {
             sqle.printStackTrace();
         }
     }
+
+    public void update(Alumno a){
+        PreparedStatement sentencia = null;
+        String sentenciaSql = "UPDATE alumnos SET nombre=?, apellidos=?, dni=?, fecha_nacimiento=? WHERE id=?";
+        try {
+            sentencia = conexion.prepareStatement(sentenciaSql);
+            sentencia.setString(1, a.getNombre());
+            sentencia.setString(2, a.getApellidos());
+            sentencia.setString(3, a.getDni());
+            //sentencia.setString(4, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(LocalDate.now()));
+            sentencia.setString(4, DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH).format(a.getFechaNacimiento()));
+            sentencia.setInt(5, a.getId());
+            sentencia.executeUpdate();
+
+            ResultSet rs = sentencia.getGeneratedKeys();
+            a.setId(rs.getInt(1));
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
+    public void delete(int id){
+        PreparedStatement sentencia = null;
+        String sentenciaSql = "DELETE FROM alumnos WHERE id=?";
+        try {
+            sentencia = conexion.prepareStatement(sentenciaSql);
+
+           sentencia.setInt(1, id);
+
+           sentencia.executeUpdate();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
 }
+
