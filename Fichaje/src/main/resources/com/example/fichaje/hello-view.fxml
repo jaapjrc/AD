@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="538.0" prefWidth="622.0" spacing="20.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19" fx:controller="com.example.fichaje.HelloController">
+<VBox alignment="CENTER" prefHeight="538.0" prefWidth="622.0" spacing="20.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.fichaje.HelloController">
   <padding>
     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
   </padding>
@@ -20,7 +20,7 @@
          <content>
             <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="436.0" prefWidth="582.0">
                   <children>
-                     <TableView fx:id="tblTrabajadores" layoutX="29.0" layoutY="21.0" prefHeight="187.0" prefWidth="536.0">
+                     <TableView fx:id="tblTrabajadores" layoutX="29.0" layoutY="21.0" onMouseClicked="#callbackClicTabla" prefHeight="187.0" prefWidth="536.0">
                        <columns>
                          <TableColumn fx:id="colId" prefWidth="75.0" text="id" />
                          <TableColumn fx:id="colNombre" prefWidth="75.0" text="Nombre" />
@@ -29,14 +29,14 @@
                            <TableColumn fx:id="colDepartamento" prefWidth="103.99993896484375" text="Departamento" />
                        </columns>
                      </TableView>
-                     <TextField fx:id="txtId" layoutX="17.0" layoutY="224.0" />
-                     <TextField fx:id="txtNombre" layoutX="17.0" layoutY="257.0" />
-                     <TextField fx:id="txtApellidos" layoutX="16.0" layoutY="298.0" />
-                     <TextField fx:id="txtDNI" layoutX="16.0" layoutY="336.0" />
-                     <TextField fx:id="txtDepartamento" layoutX="17.0" layoutY="375.0" />
-                     <Button fx:id="btnInsertar" layoutX="426.0" layoutY="237.0" mnemonicParsing="false" text="Insertar" />
-                     <Button fx:id="btnModificar" layoutX="424.0" layoutY="285.0" mnemonicParsing="false" text="Modificar" />
-                     <Button fx:id="btnEliminar" layoutX="425.0" layoutY="336.0" mnemonicParsing="false" text="Eliminar" />
+                     <TextField fx:id="txtId" layoutX="17.0" layoutY="224.0" promptText="ID" />
+                     <TextField fx:id="txtNombre" layoutX="17.0" layoutY="257.0" promptText="Nombre" />
+                     <TextField fx:id="txtApellidos" layoutX="16.0" layoutY="298.0" promptText="Apellidos" />
+                     <TextField fx:id="txtDNI" layoutX="16.0" layoutY="336.0" promptText="DNI" />
+                     <TextField fx:id="txtDepartamento" layoutX="17.0" layoutY="375.0" promptText="Departamento" />
+                     <Button fx:id="btnInsertar" layoutX="426.0" layoutY="237.0" mnemonicParsing="false" onAction="#inserta" text="Insertar" />
+                     <Button fx:id="btnModificar" layoutX="424.0" layoutY="285.0" mnemonicParsing="false" onAction="#update" text="Modificar" />
+                     <Button fx:id="btnEliminar" layoutX="425.0" layoutY="336.0" mnemonicParsing="false" onAction="#delete" text="Eliminar" />
                   </children>
                </AnchorPane>
          </content>

@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ResourceBundle;
 
 public class HelloController implements Initializable {
@@ -57,6 +58,58 @@ public class HelloController implements Initializable {
     private TextField txtNombre;
 
     private  RepositorioTrabajadores repositorioTrabajadores;
+
+    public void refrescaTabla(){
+        RepositorioTrabajadores repositorio = new RepositorioTrabajadores();
+        final ObservableList<Trabajador> trabajadores = repositorio.leerTodosFX();
+        tblTrabajadores.setItems(trabajadores);
+    }
+
+    @FXML
+    void delete() {
+        RepositorioTrabajadores r = new RepositorioTrabajadores();
+        r.delete(Integer.parseInt(txtId.getText()));
+        refrescaTabla();
+    }
+
+    @FXML
+    void inserta() {
+        Trabajador alumno = new Trabajador();
+        alumno.setNombre(txtNombre.getText());
+        alumno.setApellidos(txtApellidos.getText());
+        alumno.setDni(txtDNI.getText());
+        alumno.setDepartamento(txtDepartamento.getText());
+
+        RepositorioTrabajadores r = new RepositorioTrabajadores();
+        r.inserta(alumno);
+        refrescaTabla();
+    }
+
+    @FXML
+    void update() {
+        Trabajador trabajador=new Trabajador();
+        trabajador.setId(Integer.parseInt(txtId.getText()));
+        trabajador.setNombre(txtNombre.getText());
+        trabajador.setApellidos(txtApellidos.getText());
+        trabajador.setDni(txtDNI.getText());
+        trabajador.setDepartamento(txtDepartamento.getText());
+        RepositorioTrabajadores r= new RepositorioTrabajadores();
+        r.update(trabajador);
+        refrescaTabla();
+    }
+
+    public void callbackClicTabla(javafx.scene.input.MouseEvent mouseEvent) {
+
+        Trabajador trabajador = (Trabajador) tblTrabajadores.getSelectionModel().getSelectedItem();
+
+        txtId.setText(String.valueOf(trabajador.getId()));
+        txtNombre.setText(trabajador.getNombre());
+        txtApellidos.setText(trabajador.getApellidos());
+        txtDNI.setText(trabajador.getDni());
+        txtDepartamento.setText(trabajador.getDepartamento());
+
+    }
+
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
