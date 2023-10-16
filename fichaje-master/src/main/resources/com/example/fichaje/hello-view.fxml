@@ -42,7 +42,7 @@
                            <children>
                                   <Button fx:id="btnInsertar" onAction="#pulsarInsertar" text="Insertar" />
                                   <Button fx:id="btnModificar" onAction="#pulsarModificar" text="Modificar" />
-                                  <Button fx:id="btnEliminar" text="Eliminar" />
+                                  <Button fx:id="btnEliminar" onAction="#pulsarBorrar" text="Eliminar" />
                            </children>
                         </HBox>
                      </children>
@@ -87,6 +87,35 @@
                   </AnchorPane>
             </content>
           </Tab>
+            <Tab fx:id="tab3" text="CRUD Fichajes">
+              <content>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <TableView fx:id="tableCrudFichaje" layoutY="6.0" prefHeight="318.0" prefWidth="930.0">
+                          <columns>
+                            <TableColumn fx:id="colId2" prefWidth="75.0" text="ID" />
+                            <TableColumn fx:id="colIDTrabajador2" prefWidth="100.80001831054688" text="ID Trabajador" />
+                              <TableColumn fx:id="colFechaEntrada2" prefWidth="88.80003356933594" text="Fecha Entrada" />
+                              <TableColumn fx:id="colHoraEntrada2" prefWidth="106.4000244140625" text="Hora Entrada" />
+                              <TableColumn fx:id="colFechaSalida2" minWidth="5.5999755859375" prefWidth="80.79998779296875" text="Fecha Salida" />
+                              <TableColumn fx:id="colHoraSalida2" minWidth="0.0" prefWidth="76.0" text="Hora Salida" />
+                              <TableColumn fx:id="colSalidaFijada" prefWidth="58.4000244140625" text="Fijada" />
+                          </columns>
+                        </TableView>
+                        <TextField fx:id="idFichajeTextField" layoutX="14.0" layoutY="338.0" prefHeight="26.0" prefWidth="36.0" promptText="ID" />
+                        <TextField fx:id="idTrabajadorFichajeTextField" layoutX="58.0" layoutY="338.0" prefHeight="26.0" prefWidth="86.0" promptText="ID Trabajador" />
+                        <TextField fx:id="fechaEntradaTextField" layoutX="155.0" layoutY="338.0" prefHeight="26.0" prefWidth="130.0" promptText="Fecha Entrada" />
+                        <TextField fx:id="horaEntradaTextField" layoutX="296.0" layoutY="338.0" promptText="Hora Entrada" />
+                        <TextField fx:id="fechaSalidaTextField" layoutX="453.0" layoutY="338.0" promptText="Fecha Salida" />
+                        <TextField fx:id="horaSalidaTextField" layoutX="610.0" layoutY="338.0" promptText="Hora Salida" />
+                        <TextField fx:id="fijada" layoutX="767.0" layoutY="338.0" prefHeight="26.0" prefWidth="54.0" promptText="Fijada" />
+                        <Button fx:id="btnInsertarFichaje" layoutX="14.0" layoutY="392.0" mnemonicParsing="false" text="Insertar" />
+                        <Button fx:id="btnUpdateFichaje" layoutX="68.0" layoutY="392.0" mnemonicParsing="false" text="Modificar" />
+                        <Button fx:id="btnDeleteFichaje" layoutX="134.0" layoutY="392.0" mnemonicParsing="false" onAction="#pulsarBorrarFichaje" text="Eliminar" />
+                     </children>
+                  </AnchorPane>
+              </content>
+            </Tab>
         </tabs>
       </TabPane>
     </children>

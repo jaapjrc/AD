@@ -109,4 +109,19 @@ public class RepositorioTrabajador {
         }
     }
 
+    public void delete(int id){
+        PreparedStatement sentencia = null;
+        String sentenciaSql = "DELETE FROM trabajadores WHERE id=?";
+        try {
+            sentencia = conexion.prepareStatement(sentenciaSql);
+
+            sentencia.setInt(1, id);
+
+            sentencia.executeUpdate();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
 }

@@ -102,6 +102,58 @@ public class HelloController implements Initializable {
     @FXML
     private TableView<Fichaje> fichajeTable;
 
+    @FXML
+    private Tab tab3;
+
+    @FXML
+    private TableView<Fichaje> tableCrudFichaje;
+
+    @FXML
+    private TableColumn<Fichaje, Date> colFechaEntrada2;
+
+    @FXML
+    private TableColumn<Fichaje, Date> colFechaSalida2;
+
+    @FXML
+    private TableColumn<Fichaje, Time> colHoraEntrada2;
+
+    @FXML
+    private TableColumn<Fichaje, Time> colHoraSalida2;
+
+    @FXML
+    private TableColumn<Fichaje, Integer> colId2;
+
+    @FXML
+    private TableColumn<Fichaje, Integer> colIDTrabajador2;
+
+    @FXML
+    private TableColumn<Fichaje, Boolean> colSalidaFijada;
+
+    @FXML
+    private TextField fechaEntradaTextField;
+
+    @FXML
+    private TextField fechaSalidaTextField;
+
+    @FXML
+    private TextField fijada;
+
+    @FXML
+    private TextField horaEntradaTextField;
+
+    @FXML
+    private TextField horaSalidaTextField;
+
+    @FXML
+    private TextField idFichajeTextField;
+
+    @FXML
+    private TextField idTrabajadorFichajeTextField;
+
+    @FXML
+    private Button btnDeleteFichaje;
+
+
     AnimationTimer timer;
 
     RepositorioTrabajador repositorioTrabajador;
@@ -161,6 +213,27 @@ public class HelloController implements Initializable {
 
         fichajeTable.setItems(listaFichajes);
 
+        colId2.setCellValueFactory(new PropertyValueFactory<Fichaje, Integer>("id"));
+        colIDTrabajador2.setCellValueFactory(new PropertyValueFactory<Fichaje, Integer>("idTrabajador"));
+        colFechaEntrada2.setCellValueFactory(new PropertyValueFactory<Fichaje, Date>("fechaEntrada"));
+        colHoraEntrada2.setCellValueFactory(new PropertyValueFactory<Fichaje, Time>("horaEntrada"));
+        colFechaSalida2.setCellValueFactory(new PropertyValueFactory<Fichaje, Date>("fechaSalida"));
+        colHoraSalida2.setCellValueFactory(new PropertyValueFactory<Fichaje, Time>("horaSalida"));
+        colSalidaFijada.setCellValueFactory(new PropertyValueFactory<Fichaje, Boolean>("salidaFijada"));
+
+        tableCrudFichaje.setItems(listaFichajes);
+
+        tableCrudFichaje.setOnMouseClicked(e -> {
+            Fichaje t =tableCrudFichaje.getSelectionModel().getSelectedItem();
+            idFichajeTextField.setText(String.valueOf(t.getId()));
+            idTrabajadorFichajeTextField.setText(String.valueOf(t.getIdTrabajador()));
+            fechaEntradaTextField.setText(String.valueOf(t.getFechaEntrada()));
+            horaEntradaTextField.setText(String.valueOf(t.getHoraEntrada()));
+            fechaSalidaTextField.setText(String.valueOf(t.getFechaSalida()));
+            horaSalidaTextField.setText(String.valueOf(t.getHoraSalida()));
+            fijada.setText(String.valueOf(t.isSalidaFijada()));
+        });
+
     }
 
     public void actualizarTabla(){
@@ -169,6 +242,7 @@ public class HelloController implements Initializable {
         trabajadorTable1.setItems(listaTrabajadores);
         ObservableList<Fichaje> listaFichajes=repositorioFichaje.leerTodosFX();
         fichajeTable.setItems(listaFichajes);
+        tableCrudFichaje.setItems(listaFichajes);
 
     }
     public void pulsarInsertar(){
@@ -192,6 +266,12 @@ public class HelloController implements Initializable {
         //t.setDepartamento(departamentoTextField.getText());
 
         repositorioTrabajador.modificar(t);
+        actualizarTabla();
+    }
+
+    public void pulsarBorrar(){
+        RepositorioTrabajador r = new RepositorioTrabajador(conexion.conexion);
+        r.delete(Integer.parseInt(idTextField.getText()));
         actualizarTabla();
     }
 
@@ -235,6 +315,12 @@ public class HelloController implements Initializable {
                 actualizarTabla();
             }
         }
+    }
+
+    public void pulsarBorrarFichaje(){
+        RepositorioFichaje r = new RepositorioFichaje(conexion.conexion);
+        r.delete(Integer.parseInt(idFichajeTextField.getText()));
+        actualizarTabla();
     }
 
 }

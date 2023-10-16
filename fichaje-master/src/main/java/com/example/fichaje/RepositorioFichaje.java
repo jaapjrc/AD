@@ -121,5 +121,20 @@ public class RepositorioFichaje {
         return f;
     }
 
+    public void delete(int id){
+        PreparedStatement sentencia = null;
+        String sentenciaSql = "DELETE FROM fichajes WHERE id=?";
+        try {
+            sentencia = conexion.prepareStatement(sentenciaSql);
+
+            sentencia.setInt(1, id);
+
+            sentencia.executeUpdate();
+
+        } catch (SQLException sqle) {
+            sqle.printStackTrace();
+        }
+    }
+
 
 }
