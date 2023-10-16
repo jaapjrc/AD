@@ -7,11 +7,9 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.piscina.HelloController">
    <children>
-      <Label layoutX="46.0" layoutY="100.0" text="Fecha" />
-      <Label layoutX="112.0" layoutY="100.0" text="Hora" />
+      <Label fx:id="lblFecha" layoutX="20.0" layoutY="87.0" prefHeight="44.0" prefWidth="117.0" text="Fecha" />
       <Label layoutX="214.0" layoutY="53.0" text="Adultos" />
       <Label layoutX="370.0" layoutY="53.0" text="Menores" />
       <TableView fx:id="tableviewVentas" layoutX="20.0" layoutY="180.0" prefHeight="200.0" prefWidth="553.0">
@@ -25,9 +23,10 @@
             <TableColumn fx:id="colPrecioMenores" prefWidth="103.19997558593752" text="Precio Menores" />
         </columns>
       </TableView>
-      <TextField fx:id="textfieldAdultos" layoutX="159.0" layoutY="83.0" prefHeight="51.0" prefWidth="150.0" />
-      <TextField fx:id="textfieldMenores" layoutX="319.0" layoutY="83.0" prefHeight="51.0" prefWidth="150.0" />
+      <TextField fx:id="textfieldAdultos" layoutX="159.0" layoutY="83.0" onKeyReleased="#total" prefHeight="51.0" prefWidth="150.0" />
+      <TextField fx:id="textfieldMenores" layoutX="319.0" layoutY="83.0" onKeyReleased="#total" prefHeight="51.0" prefWidth="150.0" />
       <Label layoutX="511.0" layoutY="53.0" text="Total" />
-      <Button fx:id="btnVender" layoutX="271.0" layoutY="143.0" mnemonicParsing="false" text="Vender" />
+      <Button fx:id="btnVender" layoutX="271.0" layoutY="143.0" mnemonicParsing="false" onAction="#pulsarVenta" text="Vender" />
+      <Label fx:id="lblTotal" layoutX="497.0" layoutY="87.0" prefHeight="44.0" prefWidth="63.0" />
    </children>
 </AnchorPane>

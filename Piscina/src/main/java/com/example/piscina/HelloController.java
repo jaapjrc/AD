@@ -1,20 +1,21 @@
 package com.example.piscina;
 
+import javafx.animation.AnimationTimer;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.Properties;
 import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController implements Initializable {
 
     @FXML
     private Button btnVender;
@@ -49,10 +50,18 @@ public class HelloController {
     @FXML
     private TextField textfieldMenores;
 
+    @FXML
+    private Label lblFecha;
+
+    @FXML
+    private Label lblTotal;
+
     RepositorioVentas repositorioVentas;
     Conexion conexion;
 
+    AnimationTimer timer;
 
+    @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         conexion= new Conexion();
         repositorioVentas = new RepositorioVentas(conexion.conexion);
@@ -66,5 +75,55 @@ public class HelloController {
         colPrecioMenores.setCellValueFactory(new PropertyValueFactory<Venta, Integer>("precioMenores"));
         colFecha.setCellValueFactory(new PropertyValueFactory<Venta, LocalDate>("fecha"));
         colHora.setCellValueFactory(new PropertyValueFactory<Venta, LocalTime>("hora"));
+
+        tableviewVentas.setItems(listaVentas);
+
+        ponReloj();
+
+        textfieldAdultos.setText("0");
+        textfieldMenores.setText("0");
+    }
+
+    public void pulsarVenta(){
+        Venta t=new Venta();
+        t.setAdultos(Integer.valueOf(textfieldAdultos.getText()));
+        t.setMenores(Integer.valueOf(textfieldMenores.getText()));
+        t.setFecha(LocalDate.now());
+        t.setHora(LocalTime.now());
+        t.setPrecioAdultos(5);
+        t.setPrecioMenores(3);
+
+
+        repositorioVentas.inserta(t);
+        actualizarTabla();
+    }
+
+    public void total(){
+        if (textfieldAdultos.getText().equals("") || textfieldMenores.getText().equals("")) {
+
+        } else {
+            int adultos = Integer.valueOf(textfieldAdultos.getText());
+            int menores = Integer.valueOf(textfieldMenores.getText());
+            int total = adultos * 5 + menores * 3;
+            lblTotal.setText(String.valueOf(total));
+        }
+    }
+
+    public void actualizarTabla(){
+        ObservableList<Venta> listaVentas= repositorioVentas.leerTodos();
+        tableviewVentas.setItems(listaVentas);
+    }
+
+    public void ponReloj(){
+        //Pongo un reloj en una etiqueta cuando se pulse la segunda pestaña (tab2) por primera vez
+        if(timer==null) {
+            timer = new AnimationTimer() {
+                @Override
+                public void handle(long now) {
+                    lblFecha.setText(LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
+                }
+            };
+            timer.start();
+        }
     }
 }

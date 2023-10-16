@@ -24,8 +24,7 @@ public class RepositorioVentas {
                     "fecha     DATE," +
                     "hora     TIME," +
                     "precio_adultos    INTEGER," +
-                    "precio_menores    INTEGER," +
-                    " foreign key(id_trabajador) references trabajadores(id));";
+                    "precio_menores    INTEGER);";
             stmt.executeUpdate(CREATE_TABLE_SQL);
         }catch (SQLException sqlException){
             sqlException.printStackTrace();

@@ -21,6 +21,8 @@ public class Venta {
         this.menores = menores;
         this.fecha = fecha;
         this.hora = hora;
+        this.precioMenores = precioMenores;
+        this.precioAdultos = precioAdultos;
     }
 
     public int getId() {
