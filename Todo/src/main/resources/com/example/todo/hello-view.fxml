@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.CheckBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.todo.HelloController">
+   <children>
+      <TableView fx:id="tableviewTareas" layoutX="14.0" layoutY="14.0" prefHeight="286.0" prefWidth="554.0">
+        <columns>
+          <TableColumn fx:id="colID" prefWidth="78.4000244140625" text="ID" />
+          <TableColumn fx:id="colTarea" prefWidth="379.20001220703125" text="Tarea" />
+            <TableColumn fx:id="colTerminada" minWidth="1.5999755859375" prefWidth="96.79998779296875" text="Terminada" />
+        </columns>
+      </TableView>
+      <TextField fx:id="textfieldID" layoutX="14.0" layoutY="340.0" prefHeight="26.0" prefWidth="56.0" />
+      <TextField fx:id="textfieldTarea" layoutX="86.0" layoutY="318.0" promptText="Nombre de la tarea" />
+      <CheckBox fx:id="checkboxTerminada" layoutX="260.0" layoutY="322.0" mnemonicParsing="false" text="Terminada" />
+      <Button fx:id="btnInsertarModificar" layoutX="392.0" layoutY="318.0" mnemonicParsing="false" onAction="#pulsarInsertarModificar" text="Insertar / Modificar" />
+      <Label layoutX="36.0" layoutY="313.0" text="ID" />
+   </children>
+</AnchorPane>
