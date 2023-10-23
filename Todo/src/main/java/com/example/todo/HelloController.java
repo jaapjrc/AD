@@ -46,10 +46,11 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        conexion= new Conexion();
-        repositorioTarea = new RepositorioTarea(conexion.conexion);
+//        conexion= new Conexion();
+//        repositorioTarea = new RepositorioTarea(conexion.conexion);
+        HibernateUtil.inicia();
 
-        ObservableList<Tarea> listaTareas= repositorioTarea.leerTodos();
+        ObservableList<Tarea> listaTareas= repositorioTarea.listarTodos();
 
         colID.setCellValueFactory(new PropertyValueFactory<Tarea, Integer>("id"));
         colTarea.setCellValueFactory(new PropertyValueFactory<Tarea, String>("tarea"));

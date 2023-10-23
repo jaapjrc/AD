@@ -1,8 +1,19 @@
 package com.example.todo;
 
+import org.hibernate.annotations.Columns;
+import org.hibernate.annotations.Entity;
+import org.hibernate.annotations.Table;
+
+@Entity
+@Table(name = "tareas")
 public class Tarea {
+    @Id
+    @GeneratedValues(strategy = GenerationType.IDENTITY)
+    @Column(name="id")
     private int id;
+    @Column(name="tarea")
     private String tarea;
+    @Column(name="terminada")
     private boolean terminada;
 
     public Tarea() {

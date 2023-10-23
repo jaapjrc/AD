@@ -2,8 +2,10 @@ package com.example.todo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import org.hibernate.Session;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class RepositorioTarea {
     Connection conexion;
@@ -45,6 +47,18 @@ public class RepositorioTarea {
         return lista;
     }
 
+    public static ObservableList<Tarea> listarTodos(){
+        Session s=HibernateUtil.openSession();
+        //Mostrar todos los registros de la tabla
+        s.beginTransaction();
+        ObservableList<Tarea> tareas= (ObservableList<Tarea>) s.createQuery("from tareas").list();
+
+        s.getTransaction().commit();
+        s.close();
+
+        return tareas;
+    }
+
     public void inserta(Tarea a){
         PreparedStatement sentencia = null;
         String sentenciaSql = "INSERT INTO tareas (tarea, terminada) VALUES (?, ?)";
@@ -60,6 +74,23 @@ public class RepositorioTarea {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+    }
+
+    public static void insertar(Tarea t){
+        Session s=HibernateUtil.openSession();
+        s.beginTransaction();
+        s.save(t);
+        s.getTransaction().commit();
+        s.close();
+        System.out.println("El id es " + t.getId());
+    }
+
+    public static void modificar(Tarea t){
+        Session s=HibernateUtil.openSession();
+        s.beginTransaction();
+        s.update(t);
+        s.getTransaction().commit();
+        s.close();
     }
 
     public void modifica(Tarea a){
@@ -78,6 +109,16 @@ public class RepositorioTarea {
         } catch (SQLException sqle) {
             sqle.printStackTrace();
         }
+    }
+
+    public static void eliminar(Tarea t){
+        //Eliminar un registro en la tabla
+        Session s=HibernateUtil.openSession();
+        s.beginTransaction();
+        //Para borrar solo necesito el id
+        s.delete(t);
+        s.getTransaction().commit();
+        s.close();
     }
 
 }
