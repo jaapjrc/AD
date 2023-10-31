@@ -47,12 +47,22 @@ public class RepositorioTarea {
         return lista;
     }
 
-    public static ObservableList<Tarea> listarTodos(){
+    public static ObservableList<Tarea> listarTodosFalse(){
         Session s=HibernateUtil.openSession();
         //Mostrar todos los registros de la tabla
         s.beginTransaction();
-        ObservableList<Tarea> tareas= (ObservableList<Tarea>) s.createQuery("from tareas").list();
+        ObservableList<Tarea> tareas= (ObservableList<Tarea>) s.createQuery("FROM tareas WHERE terminada = false").list();
+        s.getTransaction().commit();
+        s.close();
 
+        return tareas;
+    }
+
+    public static ObservableList<Tarea> listarTodosTrue(){
+        Session s=HibernateUtil.openSession();
+        //Mostrar todos los registros de la tabla
+        s.beginTransaction();
+        ObservableList<Tarea> tareas= (ObservableList<Tarea>) s.createQuery("FROM tareas WHERE terminada = true").list();
         s.getTransaction().commit();
         s.close();
 
@@ -82,7 +92,6 @@ public class RepositorioTarea {
         s.save(t);
         s.getTransaction().commit();
         s.close();
-        System.out.println("El id es " + t.getId());
     }
 
     public static void modificar(Tarea t){

@@ -1,14 +1,12 @@
 package com.example.todo;
 
-import org.hibernate.annotations.Columns;
-import org.hibernate.annotations.Entity;
-import org.hibernate.annotations.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "tareas")
 public class Tarea {
     @Id
-    @GeneratedValues(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="id")
     private int id;
     @Column(name="tarea")
