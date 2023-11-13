@@ -1,20 +1,29 @@
 package com.example.primerspring.modelo;
 
+import jakarta.persistence.*;
 import lombok.Data;
 
+
+@Entity
+@Table(name="productos")
 @Data
 public class Producto {
-    private int id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+    @Column(nullable = false, unique = true)
     private String nombre;
+    @Column(columnDefinition = "TEXT")
     private String descripcion;
     private double precio;
     private String imagen;
 
-    public int getId() {
+    public long getId() {.
+
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(long id) {
         this.id = id;
     }
 

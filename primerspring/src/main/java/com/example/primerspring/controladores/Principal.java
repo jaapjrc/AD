@@ -1,6 +1,8 @@
 package com.example.primerspring.controladores;
 
 import com.example.primerspring.modelo.Producto;
+import com.example.primerspring.repositorios.RepositorioProductos;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -9,11 +11,17 @@ import java.util.ArrayList;
 
 @Controller
 public class Principal {
+    @Autowired
+    RepositorioProductos repositorioProductos;
 
     @GetMapping("/")
     public String primerapagina(Model model){
-        model.addAttribute("usuario", "Jose Antonio");
-        model.addAttribute("mes", "Octubre");
+//        model.addAttribute("usuario", "Antonio");
+//        model.addAttribute("mes", "octubre");
+
+        ArrayList<Producto> lista = repositorioProductos.findAll();
+        model.addAttribute("lista", lista);
+
         return "index";
     }
 
@@ -23,13 +31,13 @@ public class Principal {
     }
 
     @GetMapping("/privacidad")
-    public String privacidad(Model model) {
+    public String privacidad(Model model){
         return "privacidad";
     }
 
     @GetMapping("/tienda")
-    public String tienda(Model model) {
-        ArrayList<Producto> lista = new ArrayList<>();
+    public String tienda(Model model){
+        ArrayList<Producto> lista=repositorioProductos.findAll();
 
         Producto p = new Producto();
         p.setId(1);
@@ -66,6 +74,7 @@ public class Principal {
         p4.setImagen("chanclas.jpg");
 
         lista.add(p4);
+
 
         model.addAttribute("lista", lista);
 

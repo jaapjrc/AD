@@ -1,14 +1,12 @@
-package com.example.primerspring;
+package com.example.blog;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class PrimerspringApplication {
+public class BlogApplication {
 
 	public static void main(String[] args) {
-
-		SpringApplication.run(PrimerspringApplication.class, args);
+		SpringApplication.run(BlogApplication.class, args);
 	}
-
 }

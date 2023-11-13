@@ -3,12 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <title>Inicio del proyecto Primer Spring</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 </head>
 <body>
-    <h1>Este es el comienzo de una gran aventura</h1>
-    <li><a href="ubicacion">Ir a ubicacion</a></li>
-    <li><a href="privacidad">Ir a privacidad</a></li>
-    <h2> Hola <span th:text="${usuario}"></span></h2>
-    <h3> Es el mes de <span th:text="${mes}"></span></h3>
+<h1>Este es el comienzo de una gran aventura</h1>
+
+<ul>
+    <li><a href="/ubicacion">Enlace a la página de ubicacion</a></li>
+    <li><a href="/privacidad">Enlace a la página de privacidad</a></li>
+</ul>
+<h2> Hola <span th:text="${usuario}"></span></h2>
+<h3 th:text="${mes}">Lo que sea</h3>
+<a href="https://www.marca.com">Resultado</a>
+<div class="container">
+    <div th:each="producto:${lista}" class="row">
+        <div class="col" th:text="${producto.nombre}"></div>
+        <div class="col" th:text="${producto.descripcion}"></div>
+        <div class="col" th:text="${producto.precio} + ' €'"></div>
+    </div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 </html>
