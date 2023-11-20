@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crud</title>
+</head>
+<body>
+    <div class="container">
+        <table class="table stripped">
+            <a th:href="/add" class="btn btn-primary">Añadir</a>
+            <tr>
+                <th>ID</th>
+                <th>Título</th>
+                <th>Modificar</th>
+                <th>Borrar</th>
+            </tr>
+            <tr th:each="p:${peliculas}">
+                <td th:text="${p.id}"></td>
+                <td th:text="${p.titulo}"></td>
+                <td>
+                    <a th:href="'/crud/update/' + ${p.id}" class="btn btn-primary">Modificar</a>
+                </td>
+                <td>
+                    <a th:href="'/crud/delete/' + ${p.id}" class="btn btn-danger">Borrar</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
