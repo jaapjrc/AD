@@ -10,6 +10,7 @@ import java.util.ArrayList;
 public interface RepositorioPeliculas extends JpaRepository<Pelicula, Long> {
     public ArrayList<Pelicula> findAll();
     public Pelicula findById(long id);
+    public ArrayList<Pelicula> findByNacionalidad(String nacionalidad);
     public Pelicula save(Pelicula pelicula);
 }
 

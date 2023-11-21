@@ -6,17 +6,26 @@
 </head>
 <body>
     <div class="container">
+        <a href="/add" class="btn btn-primary">Añadir película</a>
         <table class="table stripped">
-            <a th:href="/add" class="btn btn-primary">Añadir</a>
             <tr>
-                <th>ID</th>
+                <th>Id</th>
                 <th>Título</th>
+                <th>Sinopsis</th>
+                <th>Fecha</th>
+                <th>Nacionalidad</th>
+                <th>Imagen</th>
                 <th>Modificar</th>
                 <th>Borrar</th>
             </tr>
+            <!--El nombre de peliculas es el que viene del controlador crud-->
             <tr th:each="p:${peliculas}">
                 <td th:text="${p.id}"></td>
                 <td th:text="${p.titulo}"></td>
+                <td th:text="${#strings.substring(p.sinopsis,0,15)}"></td>
+                <td th:text="${p.fecha}"></td>
+                <td th:text="${p.nacionalidad}"></td>
+                <td th:src="'/img/' + ${p.imagen}" style="height: 100px;"></td>
                 <td>
                     <a th:href="'/crud/update/' + ${p.id}" class="btn btn-primary">Modificar</a>
                 </td>
@@ -26,5 +35,6 @@
             </tr>
         </table>
     </div>
+
 </body>
 </html>

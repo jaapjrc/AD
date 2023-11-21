@@ -3,6 +3,8 @@ package com.example.peliculon.controladores;
 import com.example.peliculon.modelo.Pelicula;
 import com.example.peliculon.repositorios.RepositorioComentarios;
 import com.example.peliculon.repositorios.RepositorioPeliculas;
+import com.example.peliculon.servicios.ServicioComentarios;
+import com.example.peliculon.servicios.ServicioPeliculas;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,13 +17,13 @@ import java.util.ArrayList;
 public class Principal {
 
     @Autowired
-    RepositorioPeliculas repositorioPeliculas;
+    ServicioPeliculas servicioPeliculas;
     @Autowired
-    RepositorioComentarios repositorioComentarios;
+    ServicioComentarios servicioComentarios;
 
     @GetMapping("/")
     public String inicio(Model model){
-        ArrayList<Pelicula> cartelera=repositorioPeliculas.findAll();
+        ArrayList<Pelicula> cartelera=servicioPeliculas.findAll();
         model.addAttribute("cartelera", cartelera);
         return "index";
     }
@@ -32,12 +34,11 @@ public class Principal {
     @GetMapping("/pelicula/{id}")
     public String pelicula(@PathVariable long id, Model model){
 
-        Pelicula p = repositorioPeliculas.findById(id);
-
+        Pelicula p=servicioPeliculas.findById(id);
         //El nombre de "pelicula" es el que voy a usar en la vista detalle.html
         model.addAttribute("pelicula", p);
 
-        model.addAttribute("comentarios", repositorioComentarios.findByPelicula(p));
+        model.addAttribute("comentarios", servicioComentarios.findByPelicula(p));
 
         //El nombre que pongo en el return es el que tendrá el archivo .html
         return "detalle";

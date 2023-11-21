@@ -21,6 +21,9 @@ public class Pelicula {
     private String imagen;
     private String trailer;
 
-    /*@OneToMany
+/*@OneToMany
     private ArrayList<Comentario> comentarios;*/
+
+
+
 }

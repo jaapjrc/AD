@@ -37,12 +37,12 @@ public class PeliculonApplication {
 					p.setSinopsis(faker.chuckNorris().fact());
 					p.setNacionalidad(faker.country().countryCode2());
 					p.setFecha(LocalDate.now());
-					p.setTrailer("https://www.youtube.com/embed/s6-XHVueA9k?si=7uhQyfvG1TgXckLO");
+					p.setTrailer("https://www.youtube.com/embed/a_426RiwST8?si=BDxxgic4pJzkwbv5");
 
 					repositorioPeliculas.save(p);
 
-					for (int ii= 0; ii < 3; ii++) {
-						Comentario c = new Comentario();
+					for(int ii=0; ii<3; ii++){
+						Comentario c=new Comentario();
 						c.setTitulo(faker.backToTheFuture().character());
 						c.setContenido(faker.backToTheFuture().quote());
 						c.setFecha(LocalDate.now());
@@ -52,6 +52,7 @@ public class PeliculonApplication {
 					}
 				}
 			}
+
 		};
 	}
 
