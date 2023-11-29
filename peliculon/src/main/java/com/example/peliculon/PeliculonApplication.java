@@ -34,7 +34,7 @@ public class PeliculonApplication {
 				for (int i = 0; i < 5; i++) {
 					Pelicula p = new Pelicula();
 					p.setTitulo(faker.book().title());
-					p.setSinopsis(faker.chuckNorris().fact());
+					p.setSinopsis(faker.lorem().characters(100));
 					p.setNacionalidad(faker.country().countryCode2());
 					p.setFecha(LocalDate.now());
 					p.setTrailer("https://www.youtube.com/embed/a_426RiwST8?si=BDxxgic4pJzkwbv5");

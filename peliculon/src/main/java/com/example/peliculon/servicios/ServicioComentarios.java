@@ -24,8 +24,13 @@ public class ServicioComentarios {
     public ArrayList<Comentario> findByPelicula(Pelicula pelicula){
         return repo.findByPelicula(pelicula);
     }
+
     public Comentario save(Comentario comentario){
         return repo.save(comentario);
+    }
+
+    public void delete(Comentario comentario){
+        repo.delete(comentario);
     }
 
 }

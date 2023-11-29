@@ -1,25 +1,29 @@
 <!DOCTYPE html>
-<html lang="es  " xmlns:th="https://www.thymeleaf.org">
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
-
-<form th:action="${formPelicula.id != 0} ? @{/crud/modificar} : @{/crud/save}" method="post" enctype="multipart/form-data" th:object="${formPelicula}">
+<!-- El ternario es para que cuando la película tenga id, se modifique y si no tiene, se añada -->
+<!-- LAS URL/ENDPOINT del th:action serán un POSTMAPPING en nuestro controlador --->
+<!-- En th:object pongo el objeto que envío desde el controlador-->
+<form th:action="${formPelicula.id != 0} ? @{/crud/modificar} : @{/crud/save}"
+      method="post" enctype="multipart/form-data" th:object="${formPelicula}">
     <div class="container">
         <div class="row">
+            <!--Guardamos el id de la película-->
             <input type="hidden" class="form-control" th:field="*{id}">
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="titulo">Título</label>
-                    <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" required>
+                    <input type="text" class="form-control" name="titulo" id="titulo" th:field="*{titulo}" value="Munich" required>
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="sinopsis">Sinopsis</label>
-                    <textarea class="form-control" name="sinopsis" id="sinopsis" rows="3" th:field="*{sinopsis}" required></textarea>
+                    <textarea class="form-control" name="sinopsis" id="sinopsis" rows="3" th:field="*{sinopsis}" required>La venganza</textarea>
                 </div>
             </div>
         </div>
@@ -27,7 +31,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" name="fecha" id="fecha" th:field="*{fecha}" required>
+                    <input type="date" class="form-control" name="fecha" id="fecha" th:field="*{fecha}">
                 </div>
             </div>
             <div class="col-md-6">
@@ -66,7 +70,7 @@
         </div>
     </div>
 </form>
-
+<p><a href="/crud" class="btn btn-primary">Volver al listado</a></p>
 
 </body>
 </html>
