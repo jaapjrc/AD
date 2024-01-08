@@ -2,6 +2,7 @@ package com.example.peliculon.modelo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 
@@ -18,6 +19,7 @@ public class Comentario {
     private String contenido;
 
     @Temporal(TemporalType.DATE)
+    @DateTimeFormat(pattern = "dd/MM/YYYY")
     private LocalDate fecha;
 
     @ManyToOne

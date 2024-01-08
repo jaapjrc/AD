@@ -2,6 +2,7 @@ package com.example.peliculon.modelo;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -16,6 +17,7 @@ public class Pelicula {
     private String titulo;
     @Column(columnDefinition = "TEXT")
     private String sinopsis;
+    @DateTimeFormat(pattern = "dd/MM/YYYY")
     private LocalDate fecha;
     private String nacionalidad;
     private String imagen;

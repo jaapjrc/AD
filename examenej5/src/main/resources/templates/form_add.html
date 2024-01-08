@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- El ternario es para que cuando la película tenga id, se modifique y si no tiene, se añada -->
+<!-- LAS URL/ENDPOINT del th:action serán un POSTMAPPING en nuestro controlador --->
+<!-- En th:object pongo el objeto que envío desde el controlador-->
+<form th:action="${formProducto.id != 0} ? @{/modificar} : @{/save}"
+      method="post" enctype="multipart/form-data" th:object="${formProducto}">
+    <div class="container">
+        <div class="row">
+            <!--Guardamos el id de la película-->
+            <input type="hidden" class="form-control" th:field="*{id}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" class="form-control" name="nombre" id="nombre" th:field="*{nombre}" value="Munich" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="marca">Marca</label>
+                    <input type="text" class="form-control" name="marca" id="marca" th:field="*{marca}" value="Munich" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="descripcion">Descripción</label>
+                    <textarea class="form-control" name="descripcion" id="descripcion" rows="3" th:field="*{descripcion}" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="tipoProducto">Tipo de Producto</label>
+                    <select class="form-control" name="tipoProducto" id="tipoProducto" th:field="*{tipoProducto}" required>
+                        <option value="">Seleccione una tipo de producto</option>
+                        <option value="CAMARA">Cámara</option>
+                        <option value="FOCO">Foco</option>
+                        <option value="MICROFONO">Micrófono</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+<p><a href="/" class="btn btn-primary">Volver al listado</a></p>
+
+</body>
+</html>

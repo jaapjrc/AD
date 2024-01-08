@@ -31,13 +31,17 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="fecha">Fecha</label>
-                    <input type="date" class="form-control" name="fecha" id="fecha" th:field="*{fecha}">
+                    <input type="date" class="form-control" name="fecha" id="fecha" th:field="*{fecha}" th:format="'dd-MM-YYYY'">
                 </div>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="imagen">Imagen</label>
-                    <input type="text" class="form-control" name="imagen" th:field="*{imagen}" id="imagen">
+                    <input type="file" class="form-control" name="file" id="imagen" accept="image/*">
+
+                    <div th:if="${formPelicula.imagen}">
+                        <img th:src="'/files/' + ${formPelicula.imagen}" class="img-thumbnail">
+                    </div>
                 </div>
             </div>
         </div>

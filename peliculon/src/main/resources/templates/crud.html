@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Crud</title>
+    <div th:insert="components/fragments :: head"></div>
 </head>
 <body>
+    <div th:insert="components/fragments :: nav_bar"></div>
     <div class="container">
         <!--La url de href debe aparecer en el controlador para mostrar el formulario que añade registros-->
         <a href="/crud/add" class="btn btn-primary">Añadir película</a>
@@ -38,6 +40,6 @@
             </tr>
         </table>
     </div>
-
+    <div th:insert="components/fragments :: footer"></div>
 </body>
 </html>

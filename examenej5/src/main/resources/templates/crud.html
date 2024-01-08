@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Crud</title>
+  <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+  <!--La url de href debe aparecer en el controlador para mostrar el formulario que añade registros-->
+  <a href="/add" class="btn btn-primary">Añadir producto</a>
+  <table class="table stripped">
+    <tr>
+      <th>Id</th>
+      <th>Nombre</th>
+      <th>Marca</th>
+      <th>Descripción</th>
+      <th>Tipo de Producto</th>
+      <th>Modificar</th>
+      <th>Borrar</th>
+    </tr>
+    <!--El nombre de peliculas es el que viene del controlador crud-->
+    <tr th:each="p:${productos}">
+      <td th:text="${p.id}"></td>
+      <td th:text="${p.nombre}"></td>
+      <td th:text="${p.marca}"></td>
+      <td th:text="${#strings.substring(p.descripcion,0,10)}"></td>
+      <td th:text="${p.tipoProducto}"></td>
+      <td>
+        <!--La URL de th:href es un GetMapping que he puesto en el controlador-->
+        <a th:href="'/update/' + ${p.id}" class="btn btn-primary">Modificar</a>
+      </td>
+      <td>
+        <!--La URL de th:href es un GetMapping que he puesto en el controlador-->
+        <a th:href="'/delete/' + ${p.id}" class="btn btn-danger">Borrar</a>
+      </td>
+    </tr>
+  </table>
+</div>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>
