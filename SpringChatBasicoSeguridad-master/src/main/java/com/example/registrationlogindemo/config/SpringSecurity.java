@@ -1,4 +1,4 @@
-package com.example.stormcount.config;
+package com.example.registrationlogindemo.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -30,11 +30,12 @@ public class SpringSecurity {
                 .authorizeHttpRequests((authorize) ->
                         authorize.requestMatchers("/register/**").permitAll()
                                 .requestMatchers("/index").permitAll()
-                                .requestMatchers("/").permitAll()
+                                .requestMatchers("/").authenticated()
+                                .requestMatchers("/chat/**").authenticated()
+                                .requestMatchers("/elegir/**").authenticated()
+                                .requestMatchers("/destinatario/**").authenticated()
+                                .requestMatchers("/enviar/**").authenticated()
                                 .requestMatchers("/users").authenticated()
-                                .requestMatchers("/decks").authenticated()
-                                .requestMatchers("/collection").authenticated()
-                                .requestMatchers("/forum").permitAll()
                                 .requestMatchers("/delete").authenticated()
                 ).formLogin(
                         form -> form
