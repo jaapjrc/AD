@@ -10,10 +10,4 @@ public interface UserService {
     User findByEmail(String email);
     List<UserDto> findAllUsers();
 
-    //Métodos nuevos que añado yo para el chat
-    List<User> findAll();
-    User findById(long id);
-    User save(User usuario);
-    void delete(User usuario);
-    void deleteById(long id);
 }

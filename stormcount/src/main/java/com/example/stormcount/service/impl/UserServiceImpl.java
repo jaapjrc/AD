@@ -37,8 +37,8 @@ public class UserServiceImpl implements UserService {
         //encrypt the password once we integrate spring security
         //user.setPassword(userDto.getPassword());
         user.setPassword(passwordEncoder.encode(userDto.getPassword()));
-        Role role = roleRepository.findByName("ROLE_USER");
-        if (role == null) {
+        Role role = roleRepository.findByName("ROLE_ADMIN");
+        if(role == null){
             role = checkRoleExist();
         }
         user.setRoles(Arrays.asList(role));
@@ -57,14 +57,11 @@ public class UserServiceImpl implements UserService {
                 .collect(Collectors.toList());
     }
 
-    private UserDto convertEntityToDto(User user) {
+    private UserDto convertEntityToDto(User user){
         UserDto userDto = new UserDto();
-        /*String[] name = user.getName().split(" ");
+        String[] name = user.getName().split(" ");
         userDto.setFirstName(name[0]);
-        userDto.setLastName(name[1]);*/
-        userDto.setId(user.getId());
-        userDto.setFirstName(user.getName());
-        userDto.setLastName(user.getName());
+        userDto.setLastName(name[1]);
         userDto.setEmail(user.getEmail());
         return userDto;
     }
@@ -73,27 +70,5 @@ public class UserServiceImpl implements UserService {
         Role role = new Role();
         role.setName("ROLE_ADMIN");
         return roleRepository.save(role);
-    }
-
-    public List<User> findAll(){
-        return userRepository.findAll();
-    }
-
-    public User findById(long id){
-        return userRepository.findById(id);
-    }
-
-    public User findByUsername(String username){return userRepository.findByName(username);}
-
-    public User save(User usuario){
-        userRepository.save(usuario);
-        return usuario;
-    }
-
-    public void delete(User usuario){
-        userRepository.delete(usuario);
-    }
-    public void deleteById(long id){
-        userRepository.deleteById(id);
     }
 }
