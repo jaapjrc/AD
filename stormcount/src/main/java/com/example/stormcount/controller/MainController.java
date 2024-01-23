@@ -12,7 +12,12 @@ public class MainController {
     UserService userService;
 
     @GetMapping("/")
-    public String main(Model model){
+    public String main(Model model) {
         return "home";
+    }
+
+    @GetMapping("/collection")
+    public String collection(Model model) {
+        return "collection";
     }
 }
