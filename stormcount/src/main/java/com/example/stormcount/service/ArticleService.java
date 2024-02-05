@@ -15,4 +15,10 @@ public class ArticleService {
     public LinkedList<Article> findAll() {
         return repo.findAll();
     }
+
+    public Article findById(long id) { return repo.findById(id); }
+
+    public Article save(Article article) { return repo.save(article); }
+
+    public void deleteById(long id) { repo.deleteById(id);}
 }

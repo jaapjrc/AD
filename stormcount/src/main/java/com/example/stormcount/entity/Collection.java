@@ -8,7 +8,7 @@ import java.util.LinkedList;
 @Data
 @Entity
 @Table(name = "collections")
-public class Collection {
+public class  Collection {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;

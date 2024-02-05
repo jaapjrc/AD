@@ -8,6 +8,16 @@
 <body>
 <div th:insert="components/fragments :: nav_bar"></div>
 <h1>Stormcount</h1>
+<div th:each="article:${articles}">
+    <div class="card" style="width: 18rem;">
+        <img th:src="${article.img}" class="card-img-top" th:alt="'article image: ' + ${article.title}">
+        <div class="card-body">
+            <h2 class="card-title" th:text="${article.title}"></h2>
+            <p class="card-text" th:text="${#strings.substring(article.text,0,15)}"></p>
+            <a th:href=" '/article/' + ${article.id}" class="btn btn-primary">Read more</a>
+        </div>
+    </div>
+</div>
 <div th:insert="components/fragments :: footer"></div>
 </body>
 </html>

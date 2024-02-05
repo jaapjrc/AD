@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Crud</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+    <a href="/crud/add" class="btn btn-primary">Add article</a>
+    <table class="table stripped">
+        <tr>
+            <th>Id</th>
+            <th>Title</th>
+            <th>Text</th>
+            <th>Publishing</th>
+            <th>Author</th>
+            <th>Img</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="a:${articles}">
+            <td th:text="${a.id}"></td>
+            <td th:text="${a.title}"></td>
+            <td th:text="${#strings.substring(a.text,0,15)}"></td>
+            <td th:text="${a.publishing}"></td>
+            <td th:text="${a.author}"></td>
+            <td><img th:src="${a.img}" style="height: 100px;"></td>
+            <td>
+                <a th:href="'/crud/update/' + ${a.id}" class="btn btn-primary">Update</a>
+            </td>
+            <td>
+                <a th:href="'/crud/delete/' + ${a.id}" class="btn btn-danger">Delete</a>
+            </td>
+        </tr>
+    </table>
+</div>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<!-- El ternario es para que cuando la película tenga id, se modifique y si no tiene, se añada -->
+<!-- LAS URL/ENDPOINT del th:action serán un POSTMAPPING en nuestro controlador --->
+<!-- En th:object pongo el objeto que envío desde el controlador-->
+<form th:action="${formArticle.id != 0} ? @{/crud/modify} : @{/crud/save}"
+      method="post" enctype="multipart/form-data" th:object="${formArticle}">
+    <div class="container">
+        <div class="row">
+            <!--Guardamos el id de la película-->
+            <input type="hidden" class="form-control" th:field="*{id}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" th:field="*{title}" value="Munich" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="text">Text</label>
+                    <textarea class="form-control" name="text" id="text" rows="3" th:field="*{text}" required></textarea>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="publishing">Publishing</label>
+                    <input type="date" class="form-control" name="publishing" id="publishing" th:field="*{publishing}" th:format="'dd-MM-YYYY'">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="img">Img</label>
+                    <input type="file" class="form-control" name="file" id="img" accept="image/*">
+
+                    <div th:if="${formArticle.img}">
+                        <img th:src="'/files/' + ${formArticle.img}" class="img-thumbnail">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="author">Author</label>
+                    <input type="text" class="form-control" name="title" id="author" th:field="*{author}" value="Munich" required>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <button type="submit" class="btn btn-primary">Save</button>
+            </div>
+        </div>
+    </div>
+</form>
+<p><a href="/crud" class="btn btn-primary">Back to listing</a></p>
+
+</body>
+</html>
