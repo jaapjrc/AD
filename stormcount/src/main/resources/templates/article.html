@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<div th:insert="components/fragments :: nav_bar"></div>
+<div class="container">
+    <h1 th:text="${a.title}"></h1>
+    <h2 th:text="${a.author}"></h2>
+    <p th:text="${a.publishing}"></p>
+    <p th:text="${a.text}"></p>
+</div>
+<div th:insert="components/fragments :: footer"></div>
+</body>
+</html>
