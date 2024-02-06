@@ -21,4 +21,6 @@ public class ArticleService {
     public Article save(Article article) { return repo.save(article); }
 
     public void deleteById(long id) { repo.deleteById(id);}
+
+    public LinkedList<Article> findFirst3ByOrderByIdDesc(){ return repo.findFirst3ByOrderByIdDesc(); }
 }

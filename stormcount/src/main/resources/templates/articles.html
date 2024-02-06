@@ -2,12 +2,11 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Stormcount</title>
+    <title>Title</title>
     <div th:insert="components/fragments :: head"></div>
 </head>
 <body>
 <div th:insert="components/fragments :: nav_bar"></div>
-<h1>Stormcount</h1>
 <div th:each="article:${articles}">
     <div class="card" style="width: 18rem;">
         <img th:src="${article.img}" class="card-img-top" th:alt="'article image: ' + ${article.title}">
@@ -18,7 +17,6 @@
         </div>
     </div>
 </div>
-<a th:href=" '/articles' " class="btn btn-primary">See all articles</a>
 <div th:insert="components/fragments :: footer"></div>
 </body>
 </html>

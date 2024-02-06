@@ -6,14 +6,10 @@
     <div th:insert="components/fragments :: head"></div>
 </head>
 <body>
-<!-- El ternario es para que cuando la película tenga id, se modifique y si no tiene, se añada -->
-<!-- LAS URL/ENDPOINT del th:action serán un POSTMAPPING en nuestro controlador --->
-<!-- En th:object pongo el objeto que envío desde el controlador-->
 <form th:action="${formArticle.id != 0} ? @{/crud/modify} : @{/crud/save}"
       method="post" enctype="multipart/form-data" th:object="${formArticle}">
     <div class="container">
         <div class="row">
-            <!--Guardamos el id de la película-->
             <input type="hidden" class="form-control" th:field="*{id}">
             <div class="col-md-6">
                 <div class="form-group">

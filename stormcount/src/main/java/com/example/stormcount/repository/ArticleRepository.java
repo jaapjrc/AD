@@ -14,5 +14,7 @@ public interface ArticleRepository extends JpaRepository<Article, Long> {
 
     Article save(Article article);
 
+    LinkedList<Article> findFirst3ByOrderByIdDesc();
+
 
 }

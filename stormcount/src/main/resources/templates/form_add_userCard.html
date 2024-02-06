@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <div th:insert="components/fragments :: head"></div>
+</head>
+<body>
+<form th:action="${formUserCards.id != 0} ? @{/collection/modify} : @{/collection/save}"
+      method="post" th:object="${formUserCards}">
+    <div class="container">
+        <div class="row">
+            <input type="hidden" class="form-control" th:field="*{id}">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" class="form-control" name="title" id="title" th:field="*{title}" value="Munich" required>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="text">Text</label>
+                    <textarea class="form-control" name="text" id="text" rows="3" th:field="*{text}" required></textarea>
+                </div>
+            </div>
+        </div>
+    </div>
+</form>
+</body>
+</html>

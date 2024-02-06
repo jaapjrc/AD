@@ -21,7 +21,7 @@ public class MainController {
 
     @GetMapping("/")
     public String main(Model model) {
-        LinkedList<Article> articles = articleService.findAll();
+        LinkedList<Article> articles = articleService.findFirst3ByOrderByIdDesc();
         model.addAttribute("articles", articles);
         return "home";
     }
@@ -33,8 +33,11 @@ public class MainController {
         return "article";
     }
 
-    @GetMapping("/collection")
-    public String collection(Model model) {
-        return "collection";
+    @GetMapping("/articles")
+    public String articles(Model model) {
+        LinkedList<Article> articles = articleService.findAll();
+        model.addAttribute("articles", articles);
+        return "articles";
     }
+
 }

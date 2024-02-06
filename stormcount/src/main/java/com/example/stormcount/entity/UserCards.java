@@ -7,16 +7,19 @@ import java.util.LinkedList;
 
 @Data
 @Entity
-@Table(name = "collections")
-public class  Collection {
+@Table(name = "user_cards")
+public class UserCards {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToMany
-    private LinkedList<Card> cards;
+    @ManyToOne
+    private Card card;
 
-    @OneToOne
+    @ManyToOne
     private User user;
+
+    @Column
+    private int quantity;
 
 }
