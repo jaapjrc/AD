@@ -14,5 +14,9 @@ public class CardService {
 
     public LinkedList<Card> findAll() { return repo.findAll(); }
 
+    public Card findCardByCardname(String string) { return repo.findByCardname(string); }
+
+    public void save(Card c) { repo.save(c);}
+
 
 }

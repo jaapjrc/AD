@@ -16,4 +16,10 @@ public class UserCardsService {
     public LinkedList<UserCards> findAllByUser(User user) {
         return userCardsRepository.findAllByUser(user);
     }
+
+    public void save(UserCards userCards){ userCardsRepository.save(userCards);}
+
+    public UserCards findById(long id){ return userCardsRepository.findById(id);}
+
+    public void deleteById(long id) { userCardsRepository.deleteById(id); }
 }

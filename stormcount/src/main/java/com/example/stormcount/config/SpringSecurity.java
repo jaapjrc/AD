@@ -36,6 +36,7 @@ public class SpringSecurity {
                                 .requestMatchers("/files/**").permitAll()
                                 .requestMatchers("/articles").permitAll()
                                 .requestMatchers("/article/**").permitAll()
+                                .requestMatchers("/collection/**").authenticated()
                 ).formLogin(
                         form -> form
                                 .loginPage("/login")

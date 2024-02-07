@@ -2,7 +2,9 @@ package com.example.stormcount;
 
 
 import com.example.stormcount.entity.Article;
+import com.example.stormcount.entity.Card;
 import com.example.stormcount.service.ArticleService;
+import com.example.stormcount.service.CardService;
 import com.example.stormcount.storage.StorageProperties;
 import com.example.stormcount.storage.StorageService;
 import com.github.javafaker.Faker;
@@ -22,6 +24,9 @@ public class StormcountApplication {
 
 	@Autowired
 	ArticleService articleService;
+
+	@Autowired
+	CardService cardService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(StormcountApplication.class, args);
@@ -51,6 +56,24 @@ public class StormcountApplication {
 					articleService.save(a);
 					}
 				}
+		};
+	}
+
+	@Bean
+	CommandLineRunner putCards(){
+		return args -> {
+
+			Faker faker = new Faker(new Locale("es-ES"));
+			if(cardService.findAll().size()<29) {
+				for (int i = 0; i < 30; i++) {
+					Card c = new Card();
+					c.setCardname("ExampleCard" + i);
+					c.setCardTypes("Creature");
+					c.setEffect(faker.lorem().characters(100));
+
+					cardService.save(c);
+				}
+			}
 		};
 	}
 
