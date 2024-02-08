@@ -8,8 +8,10 @@
 <body>
 <div th:insert="components/fragments :: nav_bar"></div>
 <h1>Stormcount</h1>
-<div th:each="article:${articles}">
-    <div class="card" style="width: 18rem;">
+<div class="container">
+    <div class="row row-cols-1 row-cols-md-5 g-2">
+<div th:each="article:${articles}" class="col">
+    <div class="card w-100" style="height: 300px;">
         <img th:src="${article.img}" class="card-img-top" th:alt="'article image: ' + ${article.title}">
         <div class="card-body">
             <h2 class="card-title" th:text="${article.title}"></h2>
@@ -17,6 +19,8 @@
             <a th:href=" '/article/' + ${article.id}" class="btn btn-primary">Read more</a>
         </div>
     </div>
+    </div>
+</div>
 </div>
 <a th:href=" '/articles' " class="btn btn-primary">See all articles</a>
 <div th:insert="components/fragments :: footer"></div>

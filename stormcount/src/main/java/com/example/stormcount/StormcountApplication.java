@@ -45,8 +45,8 @@ public class StormcountApplication {
 		return args -> {
 
 			Faker faker = new Faker(new Locale("es-ES"));
-			if(articleService.findAll().size()<31) {
-				for (int i = 0; i < 25; i++) {
+			if(articleService.findAll().size()<29) {
+				for (int i = 0; i < 30; i++) {
 					Article a = new Article();
 					a.setTitle(faker.zelda().game());
 					a.setText(faker.lorem().characters(100));
