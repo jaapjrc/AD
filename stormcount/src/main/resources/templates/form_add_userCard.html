@@ -20,7 +20,7 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="card">Card</label>
-                    <select class="form-control" name="card" id="card" required>
+                    <select class="form-select" name="card" id="card" required>
                         <option th:each="c:${cards}" th:value="${c.id}" th:text="${c.cardname}"></option>
                     </select>
                 </div>
